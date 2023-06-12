@@ -94,7 +94,7 @@ class CreateEmployeeComponent extends Component {
                             <div className = "card-body" style={{fontWeight:"bolder"}}>
                                 <form>
                                     <div className = "form-group" >
-                                        <h3 className="text-center">Add New Employee Details </h3>
+                                        <h3 className="text-center" style={{backgroundColor:"ButtonText", color:"white"}}>Add New Employee Details </h3>
                                             <label> First Name: </label>
                                             <input placeholder="First Name" name="firstName" className="form-control" 
                                             value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
