@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import EmployeeService from '../services/EmployeeService';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-
 
 class ListEmployeeComponent extends Component {
     constructor(props) {
@@ -27,24 +25,20 @@ class ListEmployeeComponent extends Component {
                 window.location.reload();
 
             });
-    
-        // axios.delete('http://localhost:8090/api/v1/employees/'+id)
-    
-        // .then(res => {
-    
-        //   window.location.reload();
-         
-    
-        // })
-    
-        // .catch(err => console.log(err));
-    
-    //     EmployeeService.deleteEmployee(id).then( res => {
-    //         this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
-    //     });
      }
     
 }
+  handleLogout= () =>{
+    const confirm= window.confirm("Are you sure ?");
+    if(confirm){
+            window.location.href="/";
+        }
+        else{
+            window.location.href="/employee"
+        }
+ }
+
+ 
     viewEmployee(id){
         <Link to={`/view-employee/${id}`}>this.props.history.push(`/view-employee/${id}`);</Link>
     }
@@ -69,8 +63,11 @@ class ListEmployeeComponent extends Component {
             <div  style={{backgroundImage:`url('https://wallpapercave.com/wp/wp9017429.jpg')`, height: '655px',fontWeight:"bold",color:"white"}}>
                 <div className='container'>
                     <h2 className="text-center">Employees List</h2>
-                    <div className = "row">
-                        <Link to={`/add-employee`}><button className='btn btn-info'>Add Employee</button></Link>                    
+                    <div>
+                        <Link to='/'> <button  class="btn btn-secondary btn-lg float-right " onClick={()=>this.handleLogout()}>{"LOGOUT"}</button></Link>
+                    </div>
+                    <div>
+                        <Link to={`/add-employee`}><button className='btn btn-info'>Add Employee</button></Link> 
                     </div>
                     <br></br>
                     <div className = "row">
@@ -78,13 +75,13 @@ class ListEmployeeComponent extends Component {
 
                             <thead class="thead-dark">
                                 <tr>
-                                    <th> Employee First Name</th>
-                                    <th> Employee Last Name</th>
-                                    <th> Employee Email Id</th>
-                                    <th> Employee Department</th>
-                                    <th> Employee Salary</th>
-                                    <th> Employee Gender</th>
-                                    <th> Employee DateOfBirth</th>
+                                    <th>  First Name</th>
+                                    <th> Last Name</th>
+                                    <th>  Email Id</th>
+                                    <th>  Department</th>
+                                    <th>  Salary</th>
+                                    <th>  Gender</th>
+                                    <th>  DateOfBirth</th>
                                     <th style={{width:"170px",textAlign:"center"}}> Actions</th>
                                 </tr>
                             </thead>
