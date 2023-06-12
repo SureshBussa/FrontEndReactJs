@@ -31,7 +31,7 @@ const Register = () => {
     <div style={{backgroundImage:`url('https://c4.wallpaperflare.com/wallpaper/280/44/9/dark-black-cube-square-wallpaper-preview.jpg')`}}>
         <div className="Auth-form-container">
             <form onSubmit={handlesubmit}>
-                <div className="Auth-form-content">
+                <div className="Auth-form-content" style={{fontWeight:"bolder"}}>
                     <h1>Register</h1>
                     <div className="Auth-form-content">
                         <label className="label">User Name </label>
