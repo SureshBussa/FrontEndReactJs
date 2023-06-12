@@ -39,7 +39,7 @@ const Login = () => {
     <div style={{backgroundImage:`url('https://wallpaperaccess.com/full/1642306.jpg')`}}>
         <div className="Auth-form-container" >
             <form onSubmit={handlesubmit}>
-                <div className="Auth-form-content">
+                <div className="Auth-form-content" style={{fontWeight:"bolder"}}>
                     <h1 >LogIn</h1>
                     <label className="label">Email </label>
                     <input type="text" required onChange={emailChange}></input>
