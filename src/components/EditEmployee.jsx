@@ -47,16 +47,33 @@ class UpdateEmployeeComponent extends Component {
         let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
         console.log('employee => ' + JSON.stringify(employee));
 
-       
-        const conf= window.confirm("Do you want to update ?");
+        if (this.state.firstName.length === 0) {
+            alert("firstName field is Empty");
+          }
+         else if (this.state.lastName.length === 0) {
+            alert("lastName field is Empty");
+          }
+          else if (this.state.emailId.length === 0  ) {
+            alert("emailId field is Empty");
+          }
+          else if (this.state.department.length === 0) {
+            alert("Department field is Empty");
+          }
+          else if (this.state.salary.length === 0) {
+            alert("salary field is Empty");
+          }
+          else if (this.state.gender.length === 0) {
+            alert("gender field is Empty");
+          }
+          else if (this.state.dob.length === 0) {
+            alert("dob field is Empty");
+          }
 
-        if(conf){ EmployeeService.updateEmployee(employee,this.state.id)
+        else if(window.confirm("Do you want to save ?"))
+        { EmployeeService.updateEmployee(employee,this.state.id)
             .then(res =>{
-            <Link to='/employees'> this.props.history.push('/employees');</Link>
-        
-            
+            <Link to='/employee'> this.props.history.push('/employees');</Link>
                 window.location.replace("/employee");
-                
             });
 
             }
@@ -74,7 +91,7 @@ class UpdateEmployeeComponent extends Component {
         this.setState({emailId: event.target.value});
     }
     cancel(){
-        this.props.history.push('/employees');
+        this.props.history.push('/employee');
     }
     changeDepartmentHandler= (event) => {
         this.setState({department: event.target.value});
@@ -92,7 +109,7 @@ class UpdateEmployeeComponent extends Component {
         return(
              <div>
                 
-               <div style={{backgroundImage:`url('https://www.wallpaperflare.com/static/674/247/756/abstract-shapes-minimalism-blue-background-wallpaper.jpg')`,fontWeight:"bold",fontFamily:"revert",height:'750px'}}>
+               <div style={{backgroundImage:`url('https://static.vecteezy.com/system/resources/previews/021/748/720/original/dynamic-abstract-gray-white-diagonal-shape-light-and-shadow-wavy-background-eps10-vector.jpg')`,fontWeight:"bold",fontFamily:"revert",height:'750px'}}>
                     <div className = "container">
                             <div className = "d-flex" >
                             <div className = "card-body">
@@ -114,13 +131,18 @@ class UpdateEmployeeComponent extends Component {
                                             value={this.state.emailId} onChange={this.changeEmailHandler}/>
                                     </div>
                                     <div className = "form-group">
-                                        <label > Department: </label>
-                                        <input placeholder="Department" name="department" className="form-control" 
-                                            value={this.state.department} onChange={this.changeDepartmentHandler}/>
+                                        <label>Department</label>
+                                        <select placeholder="Department" name="department" className="form-control" 
+                                            value={this.state.department} required onChange={this.changeDepartmentHandler}>
+                                            <option>None</option>
+                                            <option>Sales</option>
+                                            <option>HR</option>
+                                            <option>Accounts</option>
+                                        </select>
                                     </div>
                                     <div className = "form-group">
                                         <label > Salary: </label>
-                                        <input placeholder="salary" name="salary" className="form-control" 
+                                        <input type='number' placeholder="salary" name="salary" className="form-control" 
                                             value={this.state.salary} onChange={this.changeSalaryHandler}/>
                                     </div>
                                     <div className = "form-group">
@@ -143,7 +165,6 @@ class UpdateEmployeeComponent extends Component {
                             </div>
                             </div>
                     </div>
-
                </div>
         </div>
     )
