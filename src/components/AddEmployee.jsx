@@ -22,19 +22,40 @@ class CreateEmployeeComponent extends Component {
         event.preventDefault();
         let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
         console.log('employee => ' + JSON.stringify(employee));
-        const conf= window.confirm("Do you want to save ?");
+        // const conf= window.confirm("Do you want to save ?");
 
-        if(conf){
+        if (this.state.firstName.length === 0) {
+            alert("firstName field is Empty");
+          }
+         else if (this.state.lastName.length === 0) {
+            alert("lastName field is Empty");
+          }
+          else if (this.state.emailId.length === 0  ) {
+            alert("emailId field is Empty");
+          }
+          else if (this.state.department.length === 0) {
+            alert("Department field is Empty");
+          }
+          else if (this.state.salary.length === 0) {
+            alert("salary field is Empty");
+          }
+          else if (this.state.gender.length === 0) {
+            alert("gender field is Empty");
+          }
+          else if (this.state.dob.length === 0) {
+            alert("dob field is Empty");
+          }
+          
+        else if(window.confirm("Do you want to save ?")){
             EmployeeService.createEmployee(employee)
             .then(res =>{
-                <Link to='/employees'> this.props.history.push('/employees');</Link>
+                <Link to='/employee'> this.props.history.push('/employees');</Link>
                 window.location.replace("/employee");
                 
             });
 
             }
 
-        
     }
     changeFirstNameHandler= (event) => {
         this.setState({firstName: event.target.value});
@@ -62,7 +83,7 @@ class CreateEmployeeComponent extends Component {
     }
 
     cancel(){
-        this.props.history.push('/employees');
+        this.props.history.push('/employee');
     }
     render(){
         return(
@@ -70,7 +91,7 @@ class CreateEmployeeComponent extends Component {
                <div className = "container">
                     <div className = "row">
                         <div className = " w-100 ">
-                            <div className = "card-body">
+                            <div className = "card-body" style={{fontWeight:"bolder"}}>
                                 <form>
                                     <div className = "form-group" >
                                         <h3 className="text-center">Add New Employee Details </h3>
@@ -90,24 +111,21 @@ class CreateEmployeeComponent extends Component {
                                     </div>
                                     <div className = "form-group">
                                         <label > Department: </label>
-                                        <input placeholder="Department" name="department" className="form-control" 
-                                            value={this.state.department} required onChange={this.changeDepartmentHandler}/>
+                                        <select placeholder="Department" name="department" className="form-control" 
+                                            value={this.state.department} required onChange={this.changeDepartmentHandler}>
+                                            <option>None</option>
+                                            <option>Sales</option>
+                                            <option>HR</option>
+                                            <option>Accounts</option>
+                                        </select>
                                     </div>
                                     <div className = "form-group">
                                         <label > Salary: </label>
-                                        <input placeholder="salary" name="salary" className="form-control" 
+                                        <input type='number' placeholder="salary" name="salary" className="form-control" 
                                             value={this.state.salary} required onChange={this.changeSalaryHandler}/>
                                     </div>
                                     <div className = "form-group">
                                         <label > Gender: </label>&emsp;
-                                        {/* <label  style={{fontFamily:'-moz-initial',color:'aqua',fontSize:25}}>
-                                        <input type="radio"  name="gender" value={this.state.gender} required onChange={this.changeGenderHandler} />
-                                        Male
-                                        </label>&emsp; */}
-                                        {/* <input type="radio"  name="gender"  value={this.state.gender} required onChange={this.changeGenderHandler} />
-                                        <label  style={{fontFamily:'-moz-initial',color:'aqua',fontSize:25}}>Female</label>&emsp;
-                                        <input type="radio"  name="gender"  value={this.state.gender} required onChange={this.changeGenderHandler} />
-                                       <label  style={{fontFamily:'-moz-initial',color:'aqua',fontSize:25}}>Other</label>&emsp; */}
                                         <select placeholder="Enter M or F" name="gender" className="form-control" 
                                             value={this.state.gender} required onChange={this.changeGenderHandler}>
                                                 <option>None</option>
