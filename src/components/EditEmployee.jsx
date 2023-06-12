@@ -115,7 +115,7 @@ class UpdateEmployeeComponent extends Component {
                             <div className = "card-body">
                                 <form>
                                     <div className = "form-group">
-                                          <h3 className="text-center" style={{backgroundColor:"lightgreen", color:"black"}}>Edit Employee Details</h3>
+                                          <h3 className="text-center" style={{backgroundColor:"ButtonText", color:"white"}}>Edit Employee Details</h3>
                                         <label> First Name: </label>
                                         <input placeholder="First Name" name="firstName" className="form-control" 
                                             value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
