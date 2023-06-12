@@ -61,8 +61,8 @@ class ListEmployeeComponent extends Component {
         return (
             
             <div  style={{backgroundImage:`url('https://wallpapercave.com/wp/wp9017429.jpg')`, height: '655px',fontWeight:"bold",color:"white"}}>
-                <div className='container' style={{backgroundColor:"lightblue", color:"black"}}><br></br><br></br>
-                    <h2 className="text-center">Employees List</h2>
+                <div className='container'><br></br><br></br>
+                    <h2 className="text-center" style={{backgroundColor:"lightblue", color:"black"}}>Employees List</h2>
                     <div>
                         <Link to='/'> <button  class="btn btn-secondary btn-lg float-right " onClick={()=>this.handleLogout()}>{"LOGOUT"}</button></Link>
                     </div>
