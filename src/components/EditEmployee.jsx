@@ -42,6 +42,9 @@ class UpdateEmployeeComponent extends Component {
     });
 });
     }
+    handleHomePage=() =>{
+        window.location.href="/employee";
+     }
     updateEmployee = (e) => {
         e.preventDefault();
         let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
@@ -77,8 +80,14 @@ class UpdateEmployeeComponent extends Component {
             });
 
             }
-        
     }
+    addEmployee(){
+        this.props.history.push('/add-employee');
+    }
+    handleAdd=() =>{
+        window.location.href="/add-employee"
+    }
+
     changeFirstNameHandler= (event) => {
         this.setState({firstName: event.target.value});
     }
@@ -109,13 +118,17 @@ class UpdateEmployeeComponent extends Component {
         return(
              <div>
                 
-               <div style={{backgroundImage:`url('https://static.vecteezy.com/system/resources/previews/021/748/720/original/dynamic-abstract-gray-white-diagonal-shape-light-and-shadow-wavy-background-eps10-vector.jpg')`,fontWeight:"bold",fontFamily:"revert",height:'750px'}}>
-                    <div className = "container">
+               <div style={{backgroundImage:`url('https://static.vecteezy.com/system/resources/previews/021/748/720/original/dynamic-abstract-gray-white-diagonal-shape-light-and-shadow-wavy-background-eps10-vector.jpg')`,fontWeight:"bold",fontFamily:"revert",height:'1000px'}}>
+                    <div className = "container"> <br></br><br></br>
+                    <div className='btn-group btn-group-lg d-flex' style={{fontWeight:"bold"}} role="group" aria-label="....">
+                        <button type="button" className="btn btn-outline-dark w-100" onClick={() =>this.handleHomePage()}>Home Page</button>
+                        <button type="button" className="btn btn-outline-dark w-100 active">Edit Employee Details</button>
+                        <button type="button" className="btn btn-outline-dark w-100" onClick={() =>this.handleAdd()}>Add New Employee</button>
+                    </div>
                             <div className = "d-flex" >
                             <div className = "card-body">
                                 <form>
                                     <div className = "form-group">
-                                          <h3 className="text-center" style={{backgroundColor:"ButtonText", color:"white"}}>Edit Employee Details</h3>
                                         <label> First Name: </label>
                                         <input placeholder="First Name" name="firstName" className="form-control" 
                                             value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
@@ -146,13 +159,17 @@ class UpdateEmployeeComponent extends Component {
                                             value={this.state.salary} onChange={this.changeSalaryHandler}/>
                                     </div>
                                     <div className = "form-group">
-                                        <label > Gender: </label>
-                                        <select placeholder="Enter M or F" name="gender" className="form-control" 
-                                            value={this.state.gender} onChange={this.changeGenderHandler}>
-                                                 <option>None</option>
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                        </select>
+                                        <label>Gender: </label>
+                                        <div>
+                                            <label>
+                                                <input type="radio" name="gender" value="Male" 
+                                                onChange={this.changeGenderHandler} required />Male
+                                            </label>
+                                            <label style={{marginLeft: "30px"}}>
+                                                <input type="radio" name="gender" value="Female"
+                                                onChange={this.changeGenderHandler} />Female
+                                            </label>
+                                        </div>
                                     </div>
                                     <div className = "form-group">
                                         <label > DateofBirth: </label>
@@ -163,7 +180,7 @@ class UpdateEmployeeComponent extends Component {
                                     <Link to='/employee'> <button className="btn btn-danger"  style={{marginLeft: "10px"}}>Cancel</button></Link>
                                 </form>
                             </div>
-                            </div>
+                        </div>
                     </div>
                </div>
         </div>
