@@ -13,8 +13,6 @@ class ListEmployeeComponent extends Component {
         this.editEmployee = this.editEmployee.bind(this);
         this.deleteEmployee = this.deleteEmployee.bind(this);
     }
-    
-
     deleteEmployee(id){
         const conf= window.confirm("Do you want to delete ?");
 
@@ -34,11 +32,13 @@ class ListEmployeeComponent extends Component {
             window.location.href="/";
         }
         else{
-            window.location.href="/employee"
+            window.location.href="/employee";
         }
  }
+    handleAdd=() =>{
+        window.location.href="/add-employee"
+    }
 
- 
     viewEmployee(id){
         <Link to={`/view-employee/${id}`}>this.props.history.push(`/view-employee/${id}`);</Link>
     }
@@ -60,16 +60,14 @@ class ListEmployeeComponent extends Component {
     render() {
         return (
             
-            <div  style={{backgroundImage:`url('https://wallpapercave.com/wp/wp9017429.jpg')`, height: '655px',fontWeight:"bold",color:"white"}}>
+            <div  style={{backgroundImage:`url('https://www.pixelstalk.net/wp-content/uploads/2016/06/Desktop-Light-Blue-Wallpaper-HD.jpg')`, height: '1000px',fontWeight:"bold",color:"white"}}>
                 <div className='container'><br></br><br></br>
-                    <h2 className="text-center" style={{backgroundColor:"lightblue", color:"black"}}>Employees List</h2>
-                    <div>
-                        <Link to='/'> <button  class="btn btn-secondary btn-lg float-right " onClick={()=>this.handleLogout()}>{"LOGOUT"}</button></Link>
+                <div className='btn-group btn-group-lg d-flex' role="group" aria-label="....">
+                <button type="button" className="btn btn-outline-dark w-100 active">Home Page</button>
+                <button type="button" className="btn btn-outline-dark w-100" onClick={() =>this.handleAdd()} >Add New Employee</button>
+                <button type="button" className="btn btn-outline-dark w-100" onClick={()=>this.handleLogout()}>{"LOGOUT"}</button>
                     </div>
-                    <div>
-                        <Link to={`/add-employee`}><button className='btn btn-info'>Add Employee</button></Link> 
-                    </div>
-                    <br></br>
+                    <br></br><br></br>
                     <div className = "row">
                         <table className = "table table-striped table-bordered table-hover table-light" >
 
