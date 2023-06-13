@@ -57,6 +57,18 @@ class CreateEmployeeComponent extends Component {
             }
 
     }
+    handleLogout= () =>{
+        const confirm= window.confirm("Are you sure ?");
+        if(confirm){
+                window.location.href="/";
+            }
+            else{
+                window.location.href="/add-employee"
+            }
+     }
+     handleHomePage=() =>{
+        window.location.href="/employee";
+     }
     changeFirstNameHandler= (event) => {
         this.setState({firstName: event.target.value});
 
@@ -87,64 +99,71 @@ class CreateEmployeeComponent extends Component {
     }
     render(){
         return(
-        <div style={{backgroundImage:`url('https://wallpaperset.com/w/full/8/3/7/492402.jpg')`, height: '750px'}}>
-               <div className = "container">
-                    <div className = "row">
-                        <div className = " w-100 ">
-                            <div className = "card-body" style={{fontWeight:"bolder"}}>
-                                <form>
-                                    <div className = "form-group" >
-                                        <h3 className="text-center" style={{backgroundColor:"ButtonText", color:"white"}}>Add New Employee Details </h3>
+        <div style={{backgroundImage:`url('https://wallpaperset.com/w/full/8/3/7/492402.jpg')`, height: '1000px'}}>
+               <div className = "container"><br></br><br></br>
+                        <div className='btn-group btn-group-lg d-flex ' role="group" aria-label="....">
+                            <button type="button" className="btn btn-outline-dark w-100" onClick={()=>this.handleHomePage()}>Home Page</button>
+                            <button type="button" className="btn btn-outline-dark w-100 active" >Add New Employee</button>
+                            <button type="button" className="btn btn-outline-dark w-100" onClick={()=>this.handleLogout()}>{"LOGOUT"}</button>
+                        </div>
+                        <div className = "row">
+                            <div className = " w-100 ">
+                                <div className = "card-body" style={{fontWeight:"bolder"}}>
+                                    <form>
+                                        <div className = "form-group" >
                                             <label> First Name: </label>
                                             <input placeholder="First Name" name="firstName" className="form-control" 
                                             value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
-                                    </div>
-                                    <div className = "form-group">
-                                        <label> Last Name: </label>
-                                        <input placeholder="Last Name" name="lastName" className="form-control" 
+                                        </div>
+                                        <div className = "form-group">
+                                            <label> Last Name: </label>
+                                            <input placeholder="Last Name" name="lastName" className="form-control" 
                                             value={this.state.lastName} onChange={this.changeLastNameHandler}/>
-                                    </div>
-                                    <div className = "form-group">
-                                        <label> Email Id: </label>
-                                        <input placeholder="Email Address" name="emailId" className="form-control" 
-                                            value={this.state.emailId} onChange={this.changeEmailHandler}/>
-                                    </div>
-                                    <div className = "form-group">
-                                        <label > Department: </label>
-                                        <select placeholder="Department" name="department" className="form-control" 
-                                            value={this.state.department} required onChange={this.changeDepartmentHandler}>
-                                            <option>None</option>
-                                            <option>Sales</option>
-                                            <option>HR</option>
-                                            <option>Accounts</option>
-                                        </select>
-                                    </div>
-                                    <div className = "form-group">
-                                        <label > Salary: </label>
-                                        <input type='number' placeholder="salary" name="salary" className="form-control" 
-                                            value={this.state.salary} required onChange={this.changeSalaryHandler}/>
-                                    </div>
-                                    <div className = "form-group">
-                                        <label > Gender: </label>&emsp;
-                                        <select placeholder="Enter M or F" name="gender" className="form-control" 
-                                            value={this.state.gender} required onChange={this.changeGenderHandler}>
+                                        </div>
+                                        <div className = "form-group">
+                                            <label> Email Id: </label>
+                                            <input placeholder="Email Address" name="emailId" className="form-control" 
+                                                value={this.state.emailId} onChange={this.changeEmailHandler}/>
+                                        </div>
+                                        <div className = "form-group">
+                                            <label > Department: </label>
+                                            <select placeholder="Department" name="department" className="form-control" 
+                                                value={this.state.department} required onChange={this.changeDepartmentHandler}>
                                                 <option>None</option>
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                        </select>
-                                    </div>
-                                    <div className = "form-group">
-                                        <label > DateofBirth: </label>
-                                        <input placeholder="dob" name="dob" className="form-control"  type='date'
+                                                <option>Sales</option>
+                                                <option>HR</option>
+                                                <option>Accounts</option>
+                                            </select>
+                                        </div>
+                                        <div className = "form-group">
+                                            <label > Salary: </label>
+                                            <input type='number' placeholder="salary" name="salary" className="form-control" 
+                                            value={this.state.salary} required onChange={this.changeSalaryHandler}/>
+                                        </div>
+                                        <div className = "form-group">
+                                            <label > Gender: </label>&emsp;
+                                        <div>
+                                            <label>
+                                                <input type="radio" name="gender" value="Male" 
+                                                onChange={this.changeGenderHandler} required />Male
+                                            </label>
+                                            <label style={{marginLeft: "30px"}}>
+                                                <input type="radio" name="gender" value="Female"
+                                                onChange={this.changeGenderHandler} />Female
+                                            </label>
+                                            </div>
+                                        </div>
+                                        <div className = "form-group">
+                                            <label > DateofBirth: </label>
+                                            <input placeholder="dob" name="dob" className="form-control"  type='date'
                                             value={this.state.dob} required onChange={this.changeDobHandler}/>
-                                    </div>
-                        
-                                    <Link to='/employee'><button className="btn btn-success" onClick={this.saveEmployee} >Add</button></Link>
-                                    <Link to='/employee'> <button className="btn btn-danger"  style={{marginLeft: "10px"}}>Cancel</button></Link>
-                                </form>
+                                        </div>                       
+                                            <Link to='/employee'><button className="btn btn-success" onClick={this.saveEmployee} >Add</button></Link>
+                                            <Link to='/employee'> <button className="btn btn-danger"  style={{marginLeft: "10px"}}>Cancel</button></Link>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
         </div>
     )}
