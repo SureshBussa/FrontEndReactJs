@@ -42,7 +42,7 @@ const Login = () => {
                 <div className="Auth-form-content" style={{fontWeight:"bolder"}}>
                     <h1 >LogIn</h1>
                     <label className="label">Email </label>
-                    <input type="text" required onChange={emailChange}></input>
+                    <input type="email" required onChange={emailChange}></input>
                     <label className="label" required>Password</label><br></br>
                     <input type="password" required onChange={passwordChange}></input>
                     <button type="submit" className="btn btn-success">Login</button>  
