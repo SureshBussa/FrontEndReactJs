@@ -35,14 +35,14 @@ const Register = () => {
                     <h1>Register</h1>
                     <div className="Auth-form-content">
                         <label className="label">User Name </label>
-                        <input type="text" required onChange={nameChange}></input>
+                        <input type="text" placeholder="Enter User_Name" required onChange={nameChange}></input>
                     </div>
                     <div>
                         <label className="label">Email_Id</label>
-                        <input type="email" required onChange={emailChange}></input>
+                        <input type="email" placeholder="Enter email_ID" required onChange={emailChange}></input>
                     </div>
                         <label className="label" required>Password</label>
-                        <input type="password" required onChange={passwordChange}></input>
+                        <input type="password" placeholder="Enter Password" required onChange={passwordChange}></input>
                     <button type="submit" className="btn btn-success">Register </button>
                 </div> 
                     <p>Have an account?</p>
