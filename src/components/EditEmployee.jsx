@@ -139,8 +139,9 @@ class UpdateEmployeeComponent extends Component {
              <div>
                 
                <div style={{backgroundImage:`url('https://static.vecteezy.com/system/resources/previews/021/748/720/original/dynamic-abstract-gray-white-diagonal-shape-light-and-shadow-wavy-background-eps10-vector.jpg')`,fontWeight:"bold",fontFamily:"revert",height:'1000px'}}>
-                    <div className = "container"> <br></br><br></br>
+                    <div className = "container"><br/><br/>
                     <div className='btn-group btn-group-lg d-flex' style={{fontWeight:"bold"}} role="group" aria-label="....">
+                        <Link to='/employee'> <button className="btn btn-outline-dark" size="xl" style={{marginLeft: "10px",size:'xl', height: "50px"}}>{"<<Back"}</button></Link>
                         <button type="button" className="btn btn-outline-dark w-100" onClick={() =>this.handleHomePage()}>Home Page</button>
                         <button type="button" className="btn btn-outline-dark w-100 active">Edit Employee Details</button>
                         <button type="button" className="btn btn-outline-dark w-100" onClick={() =>this.handleAdd()}>Add New Employee</button>
