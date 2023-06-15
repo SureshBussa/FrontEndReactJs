@@ -61,13 +61,14 @@ class ListEmployeeComponent extends Component {
         return (
             
             <div  style={{backgroundImage:`url('https://www.pixelstalk.net/wp-content/uploads/2016/06/Desktop-Light-Blue-Wallpaper-HD.jpg')`, height: '1000px',fontWeight:"bold",color:"white"}}>
-                <div className='container'><br></br><br></br>
-                <div className='btn-group btn-group-lg d-flex' role="group" aria-label="....">
-                <button type="button" className="btn btn-outline-dark w-100 active">Home Page</button>
-                <button type="button" className="btn btn-outline-dark w-100" onClick={() =>this.handleAdd()} >Add New Employee</button>
-                <button type="button" className="btn btn-outline-dark w-100" onClick={()=>this.handleLogout()}>{"LOGOUT"}</button>
+                <div className='container'><br/><br/>
+                    <div className='btn-group btn-group-lg d-flex' role="group" aria-label="....">
+                        <button type="button" className="btn btn-outline-dark w-100 active">Home Page</button>
+                        <button type="button" className="btn btn-outline-dark w-100" onClick={() =>this.handleAdd()} >Add New Employee</button>
+                        <button type="button" className="btn btn-outline-dark w-100 ">Edit Employee Details</button>
+                        <button type="button" className="btn btn-outline-dark w-100" onClick={()=>this.handleLogout()}>{"LOGOUT"}</button>
                     </div>
-                    <br></br><br></br>
+                <br></br><br></br>
                     <div className = "row">
                         <table className = "table table-striped table-bordered table-hover table-light" >
 
