@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import EmployeeService from '../services/EmployeeService';
 import { Link } from 'react-router-dom';
+const emailState = {
+    emailId: '',
+    error: ''
+}
+const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 class CreateEmployeeComponent extends Component {
     constructor(props) {
@@ -17,7 +22,18 @@ class CreateEmployeeComponent extends Component {
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
         this.saveEmployee = this.saveEmployee.bind(this);
+        this.changeEmailHandler = this.changeEmailHandler.bind(this);
     }
+    emailValidation(){
+            const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            if(!this.state.emailId || regex.test(this.state.emailId) === false){
+            this.setState({
+                error: alert( "Email is not valid")
+            });
+            return false;
+            }
+            return true;
+            }
     saveEmployee = (event) => {
         event.preventDefault();
         let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
@@ -30,9 +46,13 @@ class CreateEmployeeComponent extends Component {
          else if (this.state.lastName.length === 0) {
             alert("lastName field is Empty");
           }
-          else if (this.state.emailId.length === 0  ) {
-            alert("emailId field is Empty");
-          }
+             else if(!this.state.emailId || regex.test(this.state.emailId) === false){
+            this.setState({
+                error: alert( "email format is incorrect"),
+                emailState
+            });
+            return false;
+            }
           else if (this.state.department.length === 0) {
             alert("Department field is Empty");
           }
