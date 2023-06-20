@@ -17,26 +17,27 @@ class CreateEmployeeComponent extends Component {
             department:'',
             salary:'',
             gender:'',
+            image:'',
             dob:''
         }
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
-        this.saveEmployee = this.saveEmployee.bind(this);
         this.changeEmailHandler = this.changeEmailHandler.bind(this);
+        this.saveEmployee = this.saveEmployee.bind(this);
     }
     emailValidation(){
-            const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-            if(!this.state.emailId || regex.test(this.state.emailId) === false){
+        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if(!this.state.emailId || regex.test(this.state.emailId) === false){
             this.setState({
                 error: alert( "Email is not valid")
             });
             return false;
-            }
-            return true;
-            }
+        }
+        return true;
+    }
     saveEmployee = (event) => {
         event.preventDefault();
-        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
+        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob, image:this.state.image};
         console.log('employee => ' + JSON.stringify(employee));
         // const conf= window.confirm("Do you want to save ?");
 
@@ -46,13 +47,13 @@ class CreateEmployeeComponent extends Component {
          else if (this.state.lastName.length === 0) {
             alert("lastName field is Empty");
           }
-             else if(!this.state.emailId || regex.test(this.state.emailId) === false){
+          else if(!this.state.emailId || regex.test(this.state.emailId) === false){
             this.setState({
                 error: alert( "email format is incorrect"),
                 emailState
             });
             return false;
-            }
+         }
           else if (this.state.department.length === 0) {
             alert("Department field is Empty");
           }
@@ -117,6 +118,38 @@ class CreateEmployeeComponent extends Component {
     cancel(){
         this.props.history.push('/employee');
     }
+    handleImageChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+      
+        reader.onload = (event) => {
+            // this.setState({ base64String : event.target.result.split(",")[1]});
+            const base64String = event.target.result.split(",")[1];
+           this.setState({image:base64String});
+         
+        };
+      
+        reader.onerror = (error) => {
+          console.log("Error: ", error);
+        };
+      
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      };  
+       renderUserImage = () => {
+        if (this.state.image) {
+          return (
+            <img
+              src={`data:image/jpeg;base64,${this.state.image}`}
+              alt="User"
+              style={{height:70, width:70, borderRadius:50}}
+              className="user-image"
+            />
+          );
+        }
+        return null;
+    }
     render(){
         return(
         <div style={{backgroundImage:`url('https://wallpaperset.com/w/full/8/3/7/492402.jpg')`, height: '1000px'}}>
@@ -133,16 +166,16 @@ class CreateEmployeeComponent extends Component {
                                         <div className = "form-group" >
                                             <label> First Name: </label>
                                             <input placeholder="First Name" name="firstName" className="form-control" 
-                                            value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
+                                            value={this.state.firstName}  required="required" onChange={this.changeFirstNameHandler}/>
                                         </div>
                                         <div className = "form-group">
-                                            <label> Last Name: </label>
+                                            <label  required="required"> Last Name: </label>
                                             <input placeholder="Last Name" name="lastName" className="form-control" 
                                             value={this.state.lastName} onChange={this.changeLastNameHandler}/>
                                         </div>
                                         <div className = "form-group">
                                             <label> Email Id: </label>
-                                            <input placeholder="Email Address" name="emailId" className="form-control" 
+                                            <input placeholder="Email Address" name="emailId" className="form-control" type="email" 
                                                 value={this.state.emailId} onChange={this.changeEmailHandler}/>
                                         </div>
                                         <div className = "form-group">
@@ -177,7 +210,13 @@ class CreateEmployeeComponent extends Component {
                                             <label > DateofBirth: </label>
                                             <input placeholder="dob" name="dob" className="form-control"  type='date'
                                             value={this.state.dob} required onChange={this.changeDobHandler}/>
-                                        </div>                       
+                                        </div>     
+                                        <div className="form-group" >
+                                          <label>Image</label>
+                                          <input type="file"  accept="image/*"    onChange={this.handleImageChange}  className="form-control"  required  />
+                                                     {this.renderUserImage()}
+                                       <small className="form-text ">Upload a profile picture for the user.</small>
+                                    </div>                  
                                             <Link to='/employee'><button className="btn btn-success" onClick={this.saveEmployee} >Add</button></Link>
                                             <Link to='/employee'> <button className="btn btn-danger"  style={{marginLeft: "10px"}}>Cancel</button></Link>
                                     </form>
