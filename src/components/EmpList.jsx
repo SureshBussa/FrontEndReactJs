@@ -26,6 +26,37 @@ class ListEmployeeComponent extends Component {
      }
     
 }
+renderUserImage = (employee) => {
+    if (employee.image && typeof employee.image === 'string') {
+      const blobData = atob(employee.image);
+      const arrayBuffer = new ArrayBuffer(blobData.length);
+      const uintArray = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < blobData.length; i++) {
+        uintArray[i] = blobData.charCodeAt(i);
+      }
+      const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
+  
+      const base64String = URL.createObjectURL(blob);
+      return (
+        <img
+          src={base64String}
+          alt="User"
+          style={{height:50, width:50, borderRadius:50}}
+        />
+      );
+    } else if (employee.image && Array.isArray(employee.image)) {
+      const base64String = btoa(String.fromCharCode.apply(null, employee.image));
+      return (
+        <img
+          src={`data:image/jpeg;base64,${base64String}`}
+          alt="User"
+          style={{height:50, width:50,  borderRadius:50}}
+        />
+      );
+    }
+    return null;
+  };
+
   handleLogout= () =>{
     const confirm= window.confirm("Are you sure ?");
     if(confirm){
@@ -62,18 +93,19 @@ class ListEmployeeComponent extends Component {
             
             <div  style={{backgroundImage:`url('https://www.pixelstalk.net/wp-content/uploads/2016/06/Desktop-Light-Blue-Wallpaper-HD.jpg')`, height: '1000px',fontWeight:"bold",color:"white"}}>
                 <div className='container'><br/><br/>
-                    <div className='btn-group btn-group-lg d-flex' role="group" aria-label="....">
-                        <button type="button" className="btn btn-outline-dark w-100 active">Home Page</button>
-                        <button type="button" className="btn btn-outline-dark w-100" onClick={() =>this.handleAdd()} >Add New Employee</button>
-                        <button type="button" className="btn btn-outline-dark w-100 ">Edit Employee Details</button>
-                        <button type="button" className="btn btn-outline-dark w-100" onClick={()=>this.handleLogout()}>{"LOGOUT"}</button>
+                <div className='btn-group btn-group-lg d-flex' role="group" aria-label="....">
+                <button type="button" className="btn btn-outline-dark w-100 active">Home Page</button>
+                <button type="button" className="btn btn-outline-dark w-100" onClick={() =>this.handleAdd()} >Add New Employee</button>
+                <button type="button" className="btn btn-outline-dark w-100 ">Edit Employee Details</button>
+                <button type="button" className="btn btn-outline-dark w-100" onClick={()=>this.handleLogout()}>{"LOGOUT"}</button>
                     </div>
-                <br></br><br></br>
+                    <br></br><br></br>
                     <div className = "row">
                         <table className = "table table-striped table-bordered table-hover table-light" >
 
                             <thead class="thead-dark">
                                 <tr>
+                                    <th>Image</th>
                                     <th>  First Name</th>
                                     <th> Last Name</th>
                                     <th>  Email Id</th>
@@ -89,6 +121,7 @@ class ListEmployeeComponent extends Component {
                                     this.state.employees.map(
                                         employee => 
                                         <tr key = {employee.id}>
+                                            <td>{this.renderUserImage(employee)}</td>
                                              <td> { employee.firstName} </td>   
                                              <td> {employee.lastName}</td>
                                              <td> {employee.emailId}</td>
