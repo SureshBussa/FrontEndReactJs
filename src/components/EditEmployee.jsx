@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import EmployeeService from '../services/EmployeeService';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+
 const emailState = {
     emailId: '',
     error: ''
@@ -27,6 +28,7 @@ class UpdateEmployeeComponent extends Component {
             department:'',
             salary:'',
             gender:'',
+            image:'',
             dob:''
         }
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
@@ -54,6 +56,7 @@ class UpdateEmployeeComponent extends Component {
              department:employee.department,
              salary:employee.salary,
              gender:employee.gender,
+             image:employee.image,
              dob:employee.dob
     });
 });
@@ -63,7 +66,7 @@ class UpdateEmployeeComponent extends Component {
      }
     updateEmployee = (e) => {
         e.preventDefault();
-        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob};
+        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId,department :this.state.department,salary:this.state.salary,gender:this.state.gender,dob:this.state.dob,image:this.state.image};
         console.log('employee => ' + JSON.stringify(employee));
 
         if (this.state.firstName.length === 0) {
@@ -134,12 +137,41 @@ class UpdateEmployeeComponent extends Component {
     changeDobHandler= (event) => {
         this.setState({dob: event.target.value});
     }
+    handleImageChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+      
+        reader.onload = (event) => {
+          const base64String = event.target.result.split(",")[1];
+          this.setState({image:base64String});
+        };
+      
+        reader.onerror = (error) => {
+          console.log("Error: ", error);
+        };
+      
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      };
+       renderUserImage = () => {
+        if (this.state.image) {
+          return (
+            <img
+              src={`data:image/jpeg;base64,${this.state.image}`}
+              alt="User"
+              style={{height:70, width:70, borderRadius:50}}
+            />
+          );
+        }
+        return null;
+      };
     render(){
         return(
              <div>
                 
                <div style={{backgroundImage:`url('https://static.vecteezy.com/system/resources/previews/021/748/720/original/dynamic-abstract-gray-white-diagonal-shape-light-and-shadow-wavy-background-eps10-vector.jpg')`,fontWeight:"bold",fontFamily:"revert",height:'1000px'}}>
-                    <div className = "container"><br/><br/>
+                    <div className = "container"> <br/><br/>
                     <div className='btn-group btn-group-lg d-flex' style={{fontWeight:"bold"}} role="group" aria-label="....">
                         <Link to='/employee'> <button className="btn btn-outline-dark" size="xl" style={{marginLeft: "10px",size:'xl', height: "50px"}}>{"<<Back"}</button></Link>
                         <button type="button" className="btn btn-outline-dark w-100" onClick={() =>this.handleHomePage()}>Home Page</button>
@@ -161,7 +193,7 @@ class UpdateEmployeeComponent extends Component {
                                     </div>
                                     <div className = "form-group">
                                         <label> Email Id: </label>
-                                        <input placeholder="Email Address" name="emailId" className="form-control" 
+                                        <input placeholder="Email Address" name="emailId" className="form-control" type="email" 
                                             value={this.state.emailId} onChange={this.changeEmailHandler}/>
                                     </div>
                                     <div className = "form-group">
@@ -196,6 +228,12 @@ class UpdateEmployeeComponent extends Component {
                                         <label > DateofBirth: </label>
                                         <input placeholder="dob" name="dob" className="form-control"  type='date'
                                             value={this.state.dob} onChange={this.changeDobHandler}/>
+                                    </div>
+                                    <div className="form-group">
+                                          <label>Image</label>
+                                          <input type="file"  accept="image/*"   onChange={this.handleImageChange}  className="form-control"  required />
+                                             {this.renderUserImage()}
+                                          <small className="form-text">Upload a profile picture for the user.</small>
                                     </div>
                                     <Link to='/employee'><button  onClick={this.updateEmployee}  className="btn btn-success"  >Update</button></Link>
                                     <Link to='/employee'> <button className="btn btn-danger"  style={{marginLeft: "10px"}}>Cancel</button></Link>
